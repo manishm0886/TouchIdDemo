@@ -20,6 +20,7 @@ let accessGroup = "SecuritySerivice"
  */
 
 let passwordKey = "Refresh-Token"
+let authenticatValue = "Authenticate To Get Your Name"
 
 let kSecClassValue = NSString(format: kSecClass)
 let kSecAttrAccountValue = NSString(format: kSecAttrAccount)
@@ -30,6 +31,7 @@ let kSecMatchLimitValue = NSString(format: kSecMatchLimit)
 let kSecReturnDataValue = NSString(format: kSecReturnData)
 let kSecMatchLimitOneValue = NSString(format: kSecMatchLimitOne)
 let kSecAttrAccessControlValue = NSString(format: kSecAttrAccessControl)
+let kSecUseOperationPromptValue = NSString(format: kSecUseOperationPrompt)
 
 class TouchIdManager: NSObject {
     public class func savePassword(token: NSString) {
@@ -65,11 +67,14 @@ class TouchIdManager: NSObject {
     }
     private class func load(service: NSString) -> NSString? {
         let keychainQuery: NSMutableDictionary = NSMutableDictionary(objects: [kSecClassGenericPasswordValue,
-                                                                               service, userAccount,
+                                                                               service,
+                                                                               userAccount,
                                                                                kCFBooleanTrue,
-                                                                               kSecMatchLimitOneValue],
+                                                                               kSecMatchLimitOneValue,
+                                                                               authenticatValue],
                                                                      forKeys: [kSecClassValue,
-                                                                               kSecAttrServiceValue, kSecAttrAccountValue, kSecReturnDataValue, kSecMatchLimitValue])
+                                                                               kSecAttrServiceValue, kSecAttrAccountValue, kSecReturnDataValue, kSecMatchLimitValue,
+                                                                               kSecUseOperationPromptValue])
         
         var dataTypeRef :AnyObject?
         // Search for the keychain items
