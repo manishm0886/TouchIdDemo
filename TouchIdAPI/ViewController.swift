@@ -9,10 +9,15 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    let touchIdManager = TouchIdManager.init()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        print(TouchIdManager.loadPassword() ?? "Gaand Mar Gai")
+        TouchIdManager.savePassword(token: "Manish Kumar")
+    }
+    @IBAction func launchTouchId(_ sender: Any) {
+        print(TouchIdManager.loadPassword() ?? "Gaand Mar Gai")
     }
 
     override func didReceiveMemoryWarning() {
